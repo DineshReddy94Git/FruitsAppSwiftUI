@@ -9,13 +9,21 @@ import SwiftUI
 
 @main
 struct FruitsAppApp: App {
+    
+    @AppStorage("isOnboarding") var isOnboarding : Bool = true
+    
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
-//            ContentView()
-            OnboardingView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            
+            if isOnboarding {
+                OnboardingView()
+            } else {
+                ContentView()
+            }
+            
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
